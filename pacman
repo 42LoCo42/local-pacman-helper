@@ -5,7 +5,9 @@ pacman="$root/.pacman"
 mkdir -p "$pacman/cache"
 ln -sf "/var/lib/pacman/sync" "$pacman"
 
-export LD_PRELOAD=./main.so
+[ -f "main.so" ] || make
+
+export LD_PRELOAD="./main.so"
 exec pacman \
 	--root     "$root" \
 	--dbpath   "$pacman" \
